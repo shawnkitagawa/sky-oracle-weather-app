@@ -36,7 +36,12 @@ This project follows a simple layered architecture:
 
 ## Screenshots
 
-(Add screenshots here)
+<img width="526" height="1171" alt="image" src="https://github.com/user-attachments/assets/13f94922-c102-4259-8062-142834f6bb39" />
+<img width="518" height="1157" alt="image" src="https://github.com/user-attachments/assets/5bd7fa92-c81d-41e1-9607-4b17300de3f4" />
+<img width="521" height="1164" alt="image" src="https://github.com/user-attachments/assets/671f7df3-dbd0-4627-bf0b-90670a50871d" />
+
+
+
 
 ---
 
