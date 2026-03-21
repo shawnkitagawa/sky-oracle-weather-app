@@ -27,6 +27,12 @@ It allows users to search for cities and view real-time weather data with a clea
 - Room (local database)
 
 ---
+## API
+
+**OpenWeatherMap API**
+Used to fetch real-time weather data
+Endpoints include current weather and forecast data
+Integrated using Retrofit
 
 ## Architecture
 
@@ -40,22 +46,22 @@ Repository
    ↓
 API / Room
 
--UI Layer
+**UI Layer**
 Built with Jetpack Compose
 Displays weather data, loading state, and error state
 Observes UI state from the ViewModel
 
--ViewModel Layer
+**ViewModel Layer**
 Holds and manages UI state using StateFlow
 Handles business logic for searching cities and fetching weather
 Exposes data to the UI in a lifecycle-aware way
 
--Repository Layer
+**Repository Layer**
 Acts as the single source of truth for weather data
 Fetches remote data from the weather API
 Handles local data storage for search history
 
--Local Data Layer
+**Local Data Layer**
 Uses Room database to save search history or cached data
 Remote Data Layer
 Uses Retrofit to call the weather API and parse responses
