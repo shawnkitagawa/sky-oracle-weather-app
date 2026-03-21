@@ -8,7 +8,9 @@ import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.skyoracle.ui.theme.screens.result.resultScreen
+import com.example.skyoracle.ui.theme.screens.result.Next5DaysScreen
+import com.example.skyoracle.ui.theme.screens.result.TodayScreen
+import com.example.skyoracle.ui.theme.screens.result.TodayScreen
 import com.example.skyoracle.ui.theme.screens.search.SearchScreen
 
 @Composable
@@ -23,19 +25,32 @@ fun WeatherNavHost(
         composable (route = "search")
         {
 
-            SearchScreen(oncitySelected = {lat, lon -> navController.navigate(route = "result/$lat/$lon") })
+            SearchScreen(oncitySelected = {lat, lon, name -> navController.navigate(route = "result/$lat/$lon/$name") })
         }
-        composable(route = "result/{lat}/{lon}")
+        composable(route = "result/{lat}/{lon}/{name}")
         { backStackEntry ->
             val lat = backStackEntry.arguments?.getString("lat")?.toDoubleOrNull()
             val lon = backStackEntry.arguments?.getString("lon")?.toDoubleOrNull()
-            if (lat != null && lon != null)
+            val cityName = backStackEntry.arguments?.getString("name")
+            if (lat != null && lon != null && cityName != null)
             {
-                resultScreen(lat, lon)
+                TodayScreen(lat = lat,lon = lon, cityName = cityName, Nav5Days = {lat, lon -> navController.navigate(route = "5days/$lat/$lon")})
             }
             else
             {
                 Text("Invalid arguments")
+            }
+
+        }
+        composable(route = "5days/{lat}/{lon}")
+        {
+            backStackEntry ->
+            val lat = backStackEntry.arguments?.getString("lat")?.toDoubleOrNull()
+            val lon = backStackEntry.arguments?.getString("lon")?.toDoubleOrNull()
+
+            if (lat != null && lon != null)
+            {
+                Next5DaysScreen(lat = lat , lon = lon)
             }
 
         }

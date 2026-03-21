@@ -2,8 +2,9 @@ package com.example.skyoracle.application
 
 import android.content.Context
 import com.example.skyoracle.BuildConfig
-import com.example.skyoracle.data.DefaultWeatherRepository
 import com.example.skyoracle.data.WeatherRepository
+import com.example.skyoracle.data.DefaultWeatherRepository
+import com.example.skyoracle.data.WeatherDatabase
 import com.example.skyoracle.network.GeocodingApiService
 import com.example.skyoracle.network.WeatherApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -11,8 +12,6 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 
-
-val api_key = BuildConfig.WEATHER_API_KEY
 interface AppContainer{
     val weatherRepositiory: WeatherRepository
 }
@@ -40,9 +39,10 @@ class DefaultContainer( private val context: Context
     }
 
     override val weatherRepositiory: WeatherRepository by lazy {
-        DefaultWeatherRepository( retrofitServiceGeo,
-            retrofitServiceWeather,
-            apiKey = BuildConfig.WEATHER_API_KEY)
+        DefaultWeatherRepository( geocodingApiService = retrofitServiceGeo,
+            weatherApiService = retrofitServiceWeather,
+            apiKey = BuildConfig.WEATHER_API_KEY,
+            weatherDao = WeatherDatabase.getDatabase(context).weatherDao())
     }
 }
 
